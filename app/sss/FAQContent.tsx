@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { ChevronRight, Home, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
-import { FAQS } from '@/lib/constants';
+import { FAQS, SITE } from '@/lib/constants';
 import Accordion from '@/components/UI/Accordion';
 import ScrollReveal from '@/components/UI/ScrollReveal';
 
@@ -61,12 +61,14 @@ export default function FAQContent() {
 
           <div className="mt-12 text-center">
             <p className="text-sm text-muted mb-4">Aradığınız soruyu bulamadınız mı?</p>
-            <Link
-              href="/iletisim"
+            <a
+              href={`https://wa.me/${SITE.whatsapp.replace('+', '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-accent text-white font-medium px-6 py-3 rounded-full hover:bg-accent-light transition-colors text-sm"
             >
               Bize Ulaşın
-            </Link>
+            </a>
           </div>
         </div>
       </section>

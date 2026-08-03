@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, MessageCircle, ArrowRight, ChevronDown } from 'lucide-react';
-import Link from 'next/link';
 import { SITE } from '@/lib/constants';
 
 export default function Hero() {
@@ -101,8 +100,10 @@ export default function Hero() {
             transition={{ delay: 0.6, duration: 0.6 }}
             className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
           >
-            <Link
-              href="/iletisim"
+            <a
+              href={`https://wa.me/${SITE.whatsapp.replace('+', '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent text-white text-sm sm:text-base font-medium px-8 py-4 rounded-full hover:bg-accent-light transition-all duration-300 shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30"
             >
               Teklif Al
@@ -110,7 +111,7 @@ export default function Hero() {
                 size={18}
                 className="group-hover:translate-x-1 transition-transform duration-300"
               />
-            </Link>
+            </a>
             <a
               href={`https://wa.me/${SITE.whatsapp.replace('+', '')}`}
               target="_blank"

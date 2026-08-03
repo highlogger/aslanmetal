@@ -99,9 +99,9 @@ export default function ScrapContent() {
                       <a href={`tel:${SITE.phoneRaw}`} className="flex items-center gap-1.5 text-xs font-medium text-accent hover:text-accent-light transition-colors">
                         <Phone size={13} /> Fiyat Al
                       </a>
-                      <Link href="/iletisim" className="flex items-center gap-1.5 text-xs font-medium text-muted hover:text-accent transition-colors">
+                      <a href={`https://wa.me/${SITE.whatsapp.replace('+', '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-medium text-muted hover:text-accent transition-colors">
                         <Info size={13} /> Detay
-                      </Link>
+                      </a>
                     </div>
                   </motion.div>
                 </ScrollReveal>

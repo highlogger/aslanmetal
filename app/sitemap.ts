@@ -13,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: '/hurda-cesitleri', priority: 0.9, changeFrequency: 'weekly' as const },
     { route: '/blog', priority: 0.8, changeFrequency: 'weekly' as const },
     { route: '/sss', priority: 0.7, changeFrequency: 'monthly' as const },
-    { route: '/iletisim', priority: 0.9, changeFrequency: 'monthly' as const },
     { route: '/kvkk', priority: 0.4, changeFrequency: 'yearly' as const },
     { route: '/gizlilik-politikasi', priority: 0.4, changeFrequency: 'yearly' as const },
     { route: '/cerez-politikasi', priority: 0.4, changeFrequency: 'yearly' as const },

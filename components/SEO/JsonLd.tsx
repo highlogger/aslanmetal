@@ -107,6 +107,51 @@ export function FAQSchema({ faqs }: { faqs: { question: string; answer: string }
   );
 }
 
+export function BlogPostingSchema({
+  headline,
+  description,
+  url,
+  datePublished,
+  dateModified,
+  authorName,
+}: {
+  headline: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified: string;
+  authorName: string;
+}) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline,
+    description,
+    url,
+    datePublished,
+    dateModified,
+    author: {
+      '@type': 'Organization',
+      name: authorName,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: authorName,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}/images/logo.png`,
+      },
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export function BreadcrumbSchema({ items }: { items: { name: string; item: string }[] }) {
   const schema = {
     '@context': 'https://schema.org',

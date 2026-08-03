@@ -4,11 +4,15 @@ import { BreadcrumbSchema } from '@/components/SEO/JsonLd';
 import BlogContent from './BlogContent';
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Metal geri dönüşüm, hurda fiyatları, sektör haberleri ve hurda satışı hakkında güncel bilgiler ve rehberler.',
+  title: 'İstanbul Hurda Alım Bölgeleri | Blog',
+  description: 'İstanbul\'un tüm ilçelerinde ve Sancaktepe mahallelerinde hurda alım hizmetlerimiz. Her bölge için hurda fiyatları, hurda çeşitleri ve iletişim bilgileri.',
+  keywords: [
+    'İstanbul hurda alım', 'hurda bölgeleri', 'ilçe ilçe hurda', 'Sancaktepe hurda',
+    'İstanbul hurda fiyatları', 'hurda alım yerleri', 'metal geri dönüşüm bölgeleri',
+  ],
   openGraph: {
-    title: `Blog | ${SITE.name}`,
-    description: 'Hurda ve geri dönüşüm hakkında güncel yazılar.',
+    title: `İstanbul Hurda Alım Bölgeleri | ${SITE.name}`,
+    description: 'İstanbul\'un tüm ilçelerinde hurda alım hizmeti. Bölgenize özel hurda alım bilgileri.',
   },
   alternates: { canonical: `${SITE.url}/blog` },
 };

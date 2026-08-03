@@ -32,7 +32,6 @@ export const NAV_LINKS = [
   { label: 'Hizmetler', href: '/hizmetlerimiz' },
   { label: 'Hurda Çeşitleri', href: '/hurda-cesitleri' },
   { label: 'Blog', href: '/blog' },
-  { label: 'İletişim', href: '/iletisim' },
 ];
 
 export const SERVICES = [
@@ -133,67 +132,188 @@ export const DISTRICT_SERVICE_AREAS = [
   'Sultangazi', 'Şile', 'Şişli', 'Tuzla', 'Ümraniye', 'Üsküdar', 'Zeytinburnu',
 ];
 
-export const BLOG_POSTS = [
-  {
-    slug: 'hurda-bakir-fiyatlari-2025',
-    title: 'Hurda Bakır Fiyatları 2025: Güncel Piyasa Analizi',
-    excerpt: '2025 yılı hurda bakır fiyatları, piyasa trendleri ve bakır hurda satarken dikkat edilmesi gerekenler hakkında kapsamlı rehber.',
-    date: '2025-07-15',
-    image: '/images/blog/copper-prices.jpg',
-    category: 'Hurda Fiyatları',
-    author: 'Aslan Metal',
-    tags: ['bakır', 'hurda fiyatları', 'piyasa analizi'],
-  },
-  {
-    slug: 'metal-geri-donusum-nasil-yapilir',
-    title: 'Metal Geri Dönüşüm Nasıl Yapılır? Aşamaları ve Önemi',
-    excerpt: 'Metal geri dönüşüm sürecinin aşamaları, kullanılan teknolojiler ve çevreye katkıları hakkında detaylı bilgi.',
-    date: '2025-07-10',
-    image: '/images/blog/recycling-process.jpg',
-    category: 'Geri Dönüşüm',
-    author: 'Aslan Metal',
-    tags: ['geri dönüşüm', 'metal', 'çevre'],
-  },
-  {
-    slug: 'hurda-satarken-dikkat-edilmesi-gerekenler',
-    title: 'Hurda Satarken Dikkat Edilmesi Gereken 10 Önemli Nokta',
-    excerpt: 'Hurda satışı yaparken en iyi fiyatı almanız ve güvenli işlem için bilmeniz gereken püf noktalar.',
-    date: '2025-07-05',
-    image: '/images/blog/scrap-tips.jpg',
-    category: 'Rehber',
-    author: 'Aslan Metal',
-    tags: ['hurda satışı', 'rehber', 'güvenli işlem'],
-  },
-  {
-    slug: 'istanbul-hurda-alim-hizmeti',
-    title: 'İstanbul Genelinde Hurda Alım Hizmetimiz',
-    excerpt: 'Aslan Metal olarak İstanbul\'un tüm ilçelerinde sunduğumuz profesyonel hurda alım hizmetini keşfedin.',
-    date: '2025-06-28',
-    image: '/images/blog/istanbul-service.jpg',
-    category: 'Hizmet',
-    author: 'Aslan Metal',
-    tags: ['İstanbul', 'hurda alım', 'hizmet'],
-  },
-  {
-    slug: 'fabrika-sokumu-sureci',
-    title: 'Fabrika Sökümü: Profesyonel Söküm Süreci Nasıl İşler?',
-    excerpt: 'Endüstriyel tesis ve fabrika söküm süreçleri, güvenlik önlemleri ve dikkat edilmesi gereken hususlar.',
-    date: '2025-06-20',
-    image: '/images/blog/factory-demolition.jpg',
-    category: 'Söküm',
-    author: 'Aslan Metal',
-    tags: ['fabrika sökümü', 'endüstriyel', 'güvenlik'],
-  },
-  {
-    slug: 'aluminyum-hurda-geri-donusumu',
-    title: 'Alüminyum Hurda Geri Dönüşümünün Ekonomiye Katkısı',
-    excerpt: 'Alüminyum geri dönüşümü ile sağlanan enerji tasarrufu, ekonomik faydalar ve sürdürülebilirlik.',
-    date: '2025-06-15',
-    image: '/images/blog/aluminum-recycling.jpg',
-    category: 'Geri Dönüşüm',
-    author: 'Aslan Metal',
-    tags: ['alüminyum', 'enerji tasarrufu', 'ekonomi'],
-  },
+// ============================================
+// BLOG LOCATIONS — İlçe & Mahalle Bazlı SEO Blog
+// ============================================
+
+export interface BlogLocation {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  image: string;
+  category: string;
+  location: string;
+  locationType: 'district' | 'neighborhood';
+  parentDistrict?: string;
+  tags: string[];
+  keywords: string[];
+  content: string;
+}
+
+const districtTemplate = (name: string) => `
+<h2>${name} Hurda Alım Hizmeti</h2>
+<p>Aslan Metal olarak İstanbul'un <strong>${name}</strong> ilçesinde profesyonel hurda alım hizmeti sunuyoruz. Bölgedeki sanayi kuruluşları, inşaat firmaları, fabrikalar ve bireysel müşterilerimiz için hızlı, güvenilir ve yüksek fiyatlı hurda alım çözümleri sağlıyoruz.</p>
+<p>${name} ilçesinde ikamet eden müşterilerimize <strong>yerinde ekspertiz</strong> ve <strong>anında ödeme</strong> avantajı sunuyoruz. Geniş araç filomuz sayesinde ${name} bölgesindeki hurdanızı adresinizden teslim alıyoruz.</p>
+
+<h3>${name}'da Aldığımız Hurda Çeşitleri</h3>
+<ul>
+  <li><strong>Bakır Hurda:</strong> Saf bakır, lama bakır, bobin bakır, kırkambar bakır, yanık bakır alımı</li>
+  <li><strong>Alüminyum Hurda:</strong> Profil, levha, folyo, kablo alüminyum, döküm alüminyum</li>
+  <li><strong>Demir Hurda:</strong> İnşaat demiri, profil, sac, döküm, pik, talaş demir</li>
+  <li><strong>Paslanmaz Hurda:</strong> 304 ve 316 kalite paslanmaz çelik, paslanmaz sac ve profil</li>
+  <li><strong>Sarı Hurda:</strong> Pirinç, sarı hurda, çinko karışımlı metaller</li>
+  <li><strong>Kablo Hurda:</strong> Enerji kabloları, data kabloları, bakır ve alüminyum kablo</li>
+  <li><strong>Elektronik Atık:</strong> Bilgisayar, sunucu, kart, işlemci ve elektronik hurdalar</li>
+  <li><strong>Makine Hurda:</strong> CNC, torna, pres, enjeksiyon ve endüstriyel makineler</li>
+  <li><strong>Akü Hurda:</strong> Araç aküleri, endüstriyel aküler, UPS aküleri</li>
+  <li><strong>Kurşun ve Çinko:</strong> Her türlü kurşun ve çinko hurdası</li>
+</ul>
+
+<h3>${name} Hurda Alım Sürecimiz</h3>
+<p>${name} ilçesindeki hurda alım sürecimiz şu adımlarla işler:</p>
+<ol>
+  <li><strong>İletişim:</strong> Bizi arayın veya WhatsApp üzerinden hurda bilgilerinizi iletin.</li>
+  <li><strong>Yerinde Ekspertiz:</strong> Uzman ekibimiz ${name} adresinize gelerek hurdanızı inceler.</li>
+  <li><strong>Fiyat Teklifi:</strong> Güncel piyasa fiyatları üzerinden şeffaf teklif sunarız.</li>
+  <li><strong>Tartım ve Nakliye:</strong> Dijital kantarda hassas tartım, güvenli nakliye.</li>
+  <li><strong>Anında Ödeme:</strong> Nakit veya banka havalesi ile hemen ödemenizi yaparız.</li>
+</ol>
+
+<h3>${name} Hurda Fiyatları</h3>
+<p>${name} bölgesinde hurda fiyatlarımız, Londra Metal Borsası (LME) ve güncel piyasa verilerine göre günlük olarak belirlenmektedir. En doğru ve güncel ${name} hurda fiyatları için bizi hemen arayın.</p>
+
+<h3>Neden ${name}'da Aslan Metal?</h3>
+<ul>
+  <li>Çevre ve Şehircilik Bakanlığı onaylı <strong>lisanslı</strong> geri dönüşüm firması</li>
+  <li>${name} genelinde <strong>ücretsiz keşif</strong> ve yerinde ekspertiz hizmeti</li>
+  <li><strong>Dijital kantar</strong> ile hassas ve şeffaf tartım</li>
+  <li><strong>Anında ödeme</strong> — nakit veya banka havalesi</li>
+  <li>Geniş <strong>araç filosu</strong> ile hızlı nakliye</li>
+  <li>Her miktarda hurda için <strong>rekabetçi fiyat</strong> garantisi</li>
+</ul>
+`;
+
+const neighborhoodTemplate = (name: string) => `
+<h2>Sancaktepe ${name} Mahallesi Hurda Alım Hizmeti</h2>
+<p>Aslan Metal olarak Sancaktepe ilçesinin <strong>${name}</strong> mahallesinde profesyonel hurda alım hizmeti sunuyoruz. ${name} mahallesi ve çevre bölgelerdeki tüm müşterilerimize hızlı, güvenilir ve yüksek fiyatlı hurda alım çözümleri sağlıyoruz.</p>
+<p>${name} mahallesinde ikamet eden vatandaşlarımıza <strong>yerinde ekspertiz</strong> ve <strong>anında ödeme</strong> avantajı sunuyoruz. Sancaktepe bölgesindeki merkezi konumumuz sayesinde ${name} mahallesine en hızlı şekilde ulaşıp hurdanızı teslim alıyoruz.</p>
+
+<h3>${name} Mahallesinde Aldığımız Hurda Çeşitleri</h3>
+<ul>
+  <li><strong>Bakır Hurda:</strong> Saf bakır, lama bakır, bobin bakır, kırkambar bakır, yanık bakır</li>
+  <li><strong>Alüminyum Hurda:</strong> Profil, levha, folyo, kablo alüminyum, döküm alüminyum</li>
+  <li><strong>Demir Hurda:</strong> İnşaat demiri, profil, sac, döküm, pik demir</li>
+  <li><strong>Paslanmaz Hurda:</strong> 304 ve 316 kalite paslanmaz çelik</li>
+  <li><strong>Sarı Hurda:</strong> Pirinç ve çinko karışımlı metaller</li>
+  <li><strong>Kablo Hurda:</strong> Her türlü enerji ve data kablosu</li>
+  <li><strong>Elektronik Atık:</strong> Bilgisayar, kart, işlemci ve elektronik hurdalar</li>
+  <li><strong>Akü Hurda:</strong> Araç ve endüstriyel aküler</li>
+</ul>
+
+<h3>${name} Mahallesi Hurda Alım Süreci</h3>
+<p>Sancaktepe ${name} mahallesindeki hurda alım sürecimiz:</p>
+<ol>
+  <li>Bizi telefon veya WhatsApp ile arayarak hurda bilgilerinizi iletin.</li>
+  <li>Ekibimiz ${name} mahallesindeki adresinize gelerek yerinde ekspertiz yapar.</li>
+  <li>Güncel piyasa fiyatları üzerinden şeffaf fiyat teklifi sunarız.</li>
+  <li>Dijital kantarımızda hassas tartım yapılır.</li>
+  <li>Nakit veya banka havalesi ile anında ödemeniz yapılır.</li>
+</ol>
+
+<h3>${name} Mahallesi Hurda Fiyatları</h3>
+<p>Sancaktepe ${name} mahallesinde hurda fiyatlarımız günlük olarak güncellenmektedir. Londra Metal Borsası (LME) verileri baz alınarak belirlenen fiyatlarımız için hemen arayın.</p>
+
+<h3>Sancaktepe ${name}'da Neden Aslan Metal?</h3>
+<ul>
+  <li>Sancaktepe merkezli, <strong>lisanslı</strong> geri dönüşüm firması</li>
+  <li>${name} mahallesine <strong>en yakın</strong> hurda alım noktası</li>
+  <li><strong>Ücretsiz keşif</strong> ve yerinde ekspertiz</li>
+  <li>Dijital kantar ile <strong>şeffaf tartım</strong></li>
+  <li><strong>Anında ödeme</strong> garantisi</li>
+  <li>Geniş araç filosu ile <strong>hızlı servis</strong></li>
+  <li>Her miktar ve türde hurda için <strong>en iyi fiyat</strong></li>
+</ul>
+`;
+
+const generateLocation = (
+  name: string,
+  type: 'district' | 'neighborhood',
+  parent?: string,
+): BlogLocation => {
+  const slug = type === 'district'
+    ? `istanbul-${name.toLowerCase().replace(/ /g, '-').replace(/'/g, '').replace(/ü/g, 'u').replace(/ö/g, 'o').replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g')}-hurda-alim`
+    : `sancaktepe-${name.toLowerCase().replace(/ /g, '-').replace(/'/g, '').replace(/ü/g, 'u').replace(/ö/g, 'o').replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g')}-mahallesi-hurda-alim`;
+
+  const title = type === 'district'
+    ? `${name} Hurda Alım | ${name} Demirci, Metal Hurda ve Geri Dönüşüm`
+    : `Sancaktepe ${name} Hurda Alım | ${name} Mahallesi Demirci`;
+
+  const excerpt = type === 'district'
+    ? `İstanbul ${name} ilçesinde profesyonel hurda alım hizmeti. ${name} demirci, ${name} metal hurda alımı, ${name} geri dönüşüm ve anında ödeme için Aslan Metal'i arayın.`
+    : `Sancaktepe ${name} mahallesinde hurda alım hizmeti. ${name} mahallesi demirci, ${name} hurda alımı ve metal geri dönüşüm için Aslan Metal.`;
+
+  const category = type === 'district' ? 'İstanbul İlçeleri' : 'Sancaktepe Mahalleleri';
+
+  const tags = type === 'district'
+    ? [`${name} hurda alım`, `${name} demirci`, `${name} metal hurda`, `${name} geri dönüşüm`, `İstanbul ${name}`, 'hurda fiyatları', 'metal geri dönüşüm']
+    : [`Sancaktepe ${name}`, `${name} mahallesi hurda`, `${name} demirci`, `${name} hurda alım`, 'Sancaktepe hurda', 'Sancaktepe geri dönüşüm'];
+
+  const keywords = type === 'district'
+    ? [
+        `${name} hurda alım`, `${name} demirci`, `${name} hurda fiyatları`, `${name} metal hurda`,
+        `${name} hurda`, `${name} geri dönüşüm`, `İstanbul ${name} hurda`, `${name} hurda alan firmalar`,
+        `${name} hurda satış`, `${name} bakır hurda`, `${name} alüminyum hurda`, `${name} demir hurda`,
+        `${name} paslanmaz hurda`, `${name} kablo hurda`, `${name} elektronik atık`,
+        `${name} akü hurda`, `${name} makine hurda`, `${name} sarı hurda`,
+        `${name} yerinde hurda alım`, `${name} anında ödeme hurda`,
+      ]
+    : [
+        `Sancaktepe ${name} hurda alım`, `${name} mahallesi demirci`, `${name} mahallesi hurda`,
+        `Sancaktepe ${name} hurda fiyatları`, `Sancaktepe ${name} geri dönüşüm`,
+        `${name} mahallesi metal hurda`, `Sancaktepe ${name} demir hurda`,
+        `${name} hurda alanlar`, `${name} mahallesi hurda alım`, `${name} mahallesi hurda satış`,
+        `Sancaktepe ${name} bakır hurda`, `Sancaktepe ${name} alüminyum hurda`,
+        `${name} mahallesi paslanmaz hurda`, `Sancaktepe ${name} kablo hurda`,
+        `Sancaktepe ${name} yerinde hurda`, `Sancaktepe ${name} anında ödeme hurda`,
+      ];
+
+  return {
+    slug,
+    title,
+    excerpt,
+    date: '2025-08-03',
+    image: '/images/blog/default.jpg',
+    category,
+    location: name,
+    locationType: type,
+    parentDistrict: parent,
+    tags,
+    keywords,
+    content: type === 'district' ? districtTemplate(name) : neighborhoodTemplate(name),
+  };
+};
+
+const DISTRICTS = [
+  'Adalar', 'Arnavutköy', 'Ataşehir', 'Avcılar', 'Bağcılar', 'Bahçelievler',
+  'Bakırköy', 'Başakşehir', 'Bayrampaşa', 'Beşiktaş', 'Beykoz', 'Beylikdüzü',
+  'Beyoğlu', 'Büyükçekmece', 'Çatalca', 'Çekmeköy', 'Esenler', 'Esenyurt',
+  'Eyüpsultan', 'Fatih', 'Gaziosmanpaşa', 'Güngören', 'Kadıköy', 'Kağıthane',
+  'Kartal', 'Küçükçekmece', 'Maltepe', 'Pendik', 'Sancaktepe', 'Sarıyer',
+  'Silivri', 'Sultanbeyli', 'Sultangazi', 'Şile', 'Şişli', 'Tuzla',
+  'Ümraniye', 'Üsküdar', 'Zeytinburnu',
+];
+
+const SANCAKTEPE_NEIGHBORHOODS = [
+  'Abdurrahmangazi', 'Akpınar', 'Atatürk', 'Emek', 'Eyüp Sultan', 'Fatih',
+  'Hacı Bektaş-ı Veli', 'Hilal', 'İnönü', 'Kemal Türkler', 'Meclis',
+  'Merve', 'Mevlana', 'Osman Gazi', 'Paşaköy', 'Safa', 'Samandıra',
+  'Sarıgazi', 'Veysel Karani', 'Yenidoğan', 'Yunus Emre',
+];
+
+export const BLOG_LOCATIONS: BlogLocation[] = [
+  ...DISTRICTS.map((d) => generateLocation(d, 'district')),
+  ...SANCAKTEPE_NEIGHBORHOODS.map((n) => generateLocation(n, 'neighborhood', 'Sancaktepe')),
 ];
 
 export const FAQS = [

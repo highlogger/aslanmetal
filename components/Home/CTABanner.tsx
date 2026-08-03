@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Phone, MessageCircle, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import { SITE } from '@/lib/constants';
 import ScrollReveal from '@/components/UI/ScrollReveal';
 
@@ -30,13 +29,15 @@ export default function CTABanner() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/iletisim"
+            <a
+              href={`https://wa.me/${SITE.whatsapp.replace('+', '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent text-white font-medium px-8 py-4 rounded-full hover:bg-accent-light transition-all duration-300 shadow-lg shadow-accent/25 text-sm md:text-base"
             >
               Hemen Teklif Al
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
             <a
               href={`tel:${SITE.phoneRaw}`}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 text-white font-medium px-8 py-4 rounded-full hover:bg-white/20 transition-all duration-300 text-sm md:text-base"

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { ChevronRight, Home, Scale, Recycle, Wrench, Truck, ClipboardCheck, Container, Ship, Building, Check, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { SERVICES } from '@/lib/constants';
+import { SERVICES, SITE } from '@/lib/constants';
 import ScrollReveal from '@/components/UI/ScrollReveal';
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -120,12 +120,14 @@ export default function ServicesContent() {
                       </div>
                       <h2 className="text-2xl font-bold text-primary mb-3">{service.title}</h2>
                       <p className="text-muted leading-relaxed mb-6">{service.description}</p>
-                      <Link
-                        href="/iletisim"
+                      <a
+                        href={`https://wa.me/${SITE.whatsapp.replace('+', '')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-light transition-colors group"
                       >
                         Teklif Al <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                      </Link>
+                      </a>
                     </div>
                     <div className="lg:col-span-3">
                       <div className="bg-white rounded-2xl p-6 border border-border/50">

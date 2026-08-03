@@ -133,12 +133,14 @@ export default function Header() {
             </a>
 
             {/* CTA Button */}
-            <Link
-              href="/iletisim"
+            <a
+              href={`https://wa.me/${SITE.whatsapp.replace('+', '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center text-sm font-medium bg-accent text-white px-5 py-2.5 rounded-full hover:bg-accent-light transition-all duration-300 shadow-lg shadow-accent/20"
             >
               Teklif Al
-            </Link>
+            </a>
 
             {/* Mobile Toggle */}
             <button

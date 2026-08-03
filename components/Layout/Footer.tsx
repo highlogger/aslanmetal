@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Phone, Mail, MapPin, Clock, MessageCircle, ChevronRight } from 'lucide-react';
-import { SITE, NAV_LINKS, SERVICES, BLOG_POSTS, DISTRICT_SERVICE_AREAS } from '@/lib/constants';
+import { SITE, NAV_LINKS, SERVICES, DISTRICT_SERVICE_AREAS } from '@/lib/constants';
 
 const footerLinks = {
   kurumsal: [
